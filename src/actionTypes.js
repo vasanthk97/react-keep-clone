@@ -1,4 +1,8 @@
 export default {
- ADD: 'ADD',
-  
+	ADD_TODO: 'ADD_TODO',
+	TOGGLE_TODO:'TOGGLE_TODO',
+	TOGGLE_EDIT: 'TOGGLE_EDIT',
+	EDIT: 'EDIT',
+	DELETE: 'DELETE',
+
 };

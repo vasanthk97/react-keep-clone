@@ -1,11 +1,8 @@
-
+import actiontypes from './actionTypes';
 
 const todos = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TODO':
-      console.log(action)
-      console.log(state)
-
+    case actiontypes.ADD_TODO:
       return [
         ...state,
         {
@@ -16,25 +13,31 @@ const todos = (state = [], action) => {
 
         }
       ]
-    case 'TOGGLE_TODO':
+    case actiontypes.TOGGLE_TODO:
       return state.map(todo =>
         (todo.id === action.id)
           ? {...todo, completed: !todo.completed}
           : todo
       )
-      case 'TOGGLE_EDIT':
+      case actiontypes.TOGGLE_EDIT:
       return state.map(todo =>
         (todo.id === action.id)
-          ? {...todo, editing: !todo.completed}
+          ? {...todo, editing: !todo.editing}
           : todo
       )
-      case 'EDIT':
+      case actiontypes.EDIT:
+      console.log(action)
       return state.map(todo =>
           (todo.id === action.id)
           ? {...todo, text: action.text}
           : todo
         )
-    default:
+      case actiontypes.DELETE:
+      console.log(action)
+      return state.filter(todo =>
+        todo.id !== action.id
+      );
+      default:
       return state
   }
 }
