@@ -1,16 +1,17 @@
-import actiontypes from './actionTypes';
+import actiontypes from '../actions/actionTypes';
 
 const todos = (state = [], action) => {
   switch (action.type) {
     case actiontypes.ADD_TODO:
+      console.log(action)
       return [
         ...state,
         {
           id: action.id,
           text: action.text,
           completed: false,
-          editing : false
-
+          editing : false,
+          card : action.card
         }
       ]
     case actiontypes.TOGGLE_TODO:

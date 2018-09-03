@@ -1,10 +1,11 @@
 import actiontypes from './actionTypes';
 
 let nextTodoId = 0
-export const addTodo = text => ({
+export const addTodo = (text, card) => ({
   type: actiontypes.ADD_TODO,
   id: nextTodoId++,
-  text
+  text,
+  card,
 })
 
 // export const setVisibilityFilter = filter => ({
