@@ -11,7 +11,8 @@ const todos = (state = [], action) => {
           text: action.text,
           completed: false,
           editing : false,
-          card : action.card
+          card : action.card,
+          description : "",
         }
       ]
     case actiontypes.TOGGLE_TODO:
@@ -38,6 +39,14 @@ const todos = (state = [], action) => {
       return state.filter(todo =>
         todo.id !== action.id
       );
+      case actiontypes.EDIT_DESCRIPTION:
+      console.log(action)
+      return state.map(todo =>
+          (todo.id === action.id)
+          ? {...todo, description: action.description}
+          : todo
+        )
+      
       default:
       return state
   }

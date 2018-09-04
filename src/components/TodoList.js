@@ -4,11 +4,9 @@ import PropTypes from 'prop-types'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { connect } from 'react-redux'
-import { toggleTodo, toggleEdit, edit,deleteTodo } from '../actions/actions'
+import { toggleTodo, toggleEdit, edit,deleteTodo ,editDescription,toggleModal} from '../actions/actions'
 
-const TodoList = ({ todos=[] ,toggleTodo , toggleEdit,deleteTodo , card}) => {
-    {console.log(card)}
-
+const TodoList = ({ todos=[],modal = false ,toggleTodo , toggleEdit,deleteTodo,edit,editDescription ,card, toggleModal}) => {
     return(
     <ul style={{listStyleType: "none",padding:"0px" }}>
        {todos.map(todo =>
@@ -19,9 +17,14 @@ const TodoList = ({ todos=[] ,toggleTodo , toggleEdit,deleteTodo , card}) => {
         toggleTodo = {() => toggleTodo(todo.id)}
         toggleEdit = {() => toggleEdit(todo.id)}
         deleteTodo = {() => deleteTodo(todo.id)}
+        editDescription = {editDescription}
+        edit = {edit}
         cardBoard = {card}
         card = {todo.card}
+        description = {todo.description}
         showIncomplete = {true}
+        id = {todo.id}
+
       />
       
         </div>
@@ -32,12 +35,16 @@ const TodoList = ({ todos=[] ,toggleTodo , toggleEdit,deleteTodo , card}) => {
   }
 const mapStateToProps = state => ({
   
-  todos: state.todos
+  todos: state.todos,
+  modal : state.modal
 })
 const mapDispatchToProps = dispatch => ({
   toggleTodo: id => dispatch(toggleTodo(id)),
   toggleEdit : id => dispatch (toggleEdit(id)),
   deleteTodo : id => dispatch(deleteTodo(id)),
+  edit : (id, text) => dispatch (edit (id,text)),
+  editDescription : (id,description) => dispatch(editDescription(id,description)),
+  toggleModal : () => dispatch(toggleModal())
 })
 
 TodoList.propTypes = {
@@ -46,6 +53,7 @@ TodoList.propTypes = {
     completed: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired,
     card : PropTypes.string.isRequired,
+    description : PropTypes.string.isRequired
   }).isRequired).isRequired,
   toggleTodo: PropTypes.func.isRequired,
     toggleEdit: PropTypes.func.isRequired,

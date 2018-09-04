@@ -40,5 +40,14 @@ export const edit = (id, text) => ({
 
 })
 
+export const editDescription = (id, description) => ({
+  type: actiontypes.EDIT_DESCRIPTION,
+  id,
+  description
 
+})
+
+export const toggleModal = () => ({
+  type : "TOGGLE_MODAL"
+})
 
