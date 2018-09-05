@@ -1,4 +1,6 @@
 import actiontypes from '../actions/actionTypes';
+import axios from 'axios';
+
 
 const todos = (state = [], action) => {
   switch (action.type) {
@@ -16,6 +18,7 @@ const todos = (state = [], action) => {
         }
       ]
     case actiontypes.TOGGLE_TODO:
+      console.log("here")
       return state.map(todo =>
         (todo.id === action.id)
           ? {...todo, completed: !todo.completed}
@@ -46,8 +49,16 @@ const todos = (state = [], action) => {
           ? {...todo, description: action.description}
           : todo
         )
+      case actiontypes.REPLACE_ALL :
+      console.log("REPLACE_ALL")
+      console.log(action.newState)
+      return action.newState
+
+      case actiontypes.GET_ALL :
       
+      return state
       default:
+      console.log("here")
       return state
   }
 }

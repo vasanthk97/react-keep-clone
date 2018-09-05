@@ -1,13 +1,13 @@
 import React from "react";
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import {addTodo} from '../actions/actions'
+import {addTodo,getAll} from '../actions/actions'
 import { connect } from 'react-redux'
-
+import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-const AddTodo = ({ dispatch,card }) => {
+const AddTodo = ({ dispatch,todos,card }) => {
   var input =  React.createRef();
   var inputId = "input" + card.toString();
     return(
@@ -23,16 +23,22 @@ const AddTodo = ({ dispatch,card }) => {
 
 
   function add() {
-        console.log("here")
         input = document.getElementById(inputId)
         var todo = input.value
-        console.log(todo)
         if (!todo.trim()) {
           return
         }
         input.value = ''
+        var todoObject = {
+          "text" : todo,
+          "description" : "",
+          "card" : card,
+          "completed" : false
 
-        dispatch(addTodo(todo,card))
+        }
+        
+        
+        dispatch(addTodo(todoObject))
               }
  
 }
@@ -55,5 +61,8 @@ const styles = {
   }
 };
 
-
-export default connect()(AddTodo)
+const mapStateToProps = state => ({
+  
+  todos: state.todos,
+})
+export default connect(mapStateToProps)(AddTodo)

@@ -10,6 +10,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Input from '@material-ui/core/Input';
 import VisibleTodoList from '../containers/VisibleTodoList'
 import TodoList from './TodoList'
+
+
 class MyCard extends React.Component{
 	 constructor (props) {
         super(props);
@@ -29,6 +31,8 @@ class MyCard extends React.Component{
         this.titleStyle = {
             fontWeight : "bold",
         }
+        console.log(this.props.todos)
+        
     }
 
 	render () {
@@ -39,7 +43,7 @@ class MyCard extends React.Component{
               <CardContent>
                     <div style = {this.titleStyle}> {this.props.title} </div>
                     <div style = {{overflow  : "hidden" , maxHeight : "330px", overflowY : "auto"}}>
-                    <TodoList card = {this.props.title}/>
+                    <TodoList  todos={this.props.todos} card = {this.props.title}/>
                     </div> 
 
                 </CardContent>
@@ -58,6 +62,4 @@ class MyCard extends React.Component{
 
 
 
-
-
-export default MyCard;
+export default MyCard

@@ -10,6 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import ReactModal from 'react-modal';
+import axios from 'axios';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -56,6 +57,9 @@ class TodoListItem extends React.Component {
       showModal: false,
       text: this.props.text,
     };
+
+    
+
     
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -118,13 +122,14 @@ class TodoListItem extends React.Component {
 
 
             
-        <div onClick = {this.handleOpenModal} style = {{ minWidth : "200px", maxWidth : "100%", paddingTop : "12px" ,fontSize : "25px",  display : "flex",
+        <div style = {{ minWidth : "200px", maxWidth : "100%", paddingTop : "12px" ,fontSize : "25px",  display : "flex",
       flexDirection : "row" }}>
             <Checkbox style = {{top : "-7px" ,marginLeft : "3px"}}
               checked={this.props.completed}
               onChange={this.props.toggleTodo}
+
             />
-            <div >
+            <div  onClick = {this.handleOpenModal}  style = {{width : "100%"}}>
             {this.state.text}
             </div>
         </div>

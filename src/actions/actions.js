@@ -1,23 +1,27 @@
 import actiontypes from './actionTypes';
+import {store} from "../store"
+import {replaceAllService, addTodoService} from './actionService'
 
-let nextTodoId = 0
-export const addTodo = (text, card) => ({
-  type: actiontypes.ADD_TODO,
-  id: nextTodoId++,
-  text,
-  card,
-})
+export let nextTodoId = 0
 
-// export const setVisibilityFilter = filter => ({
-//   type: 'SET_VISIBILITY_FILTER',
-//   filter
-// })
+export function addTodo(todoObject){
+  nextTodoId++;
+  console.log(nextTodoId)
+  return addTodoService(todoObject,nextTodoId)
+}
+
+
 
 export const toggleTodo = id => ({
   type: actiontypes.TOGGLE_TODO,
   id
 })
-
+export function toggleTodoAction(id) {  
+  return {
+    type: actiontypes.TOGGLE_TODO,
+    id : id
+  }
+}
 // export const VisibilityFilters = {
 //   SHOW_ALL: 'SHOW_ALL',
 //   SHOW_COMPLETED: 'SHOW_COMPLETED',
@@ -51,3 +55,10 @@ export const toggleModal = () => ({
   type : "TOGGLE_MODAL"
 })
 
+export function replaceAll(object){
+  return replaceAllService(object)
+}
+
+export const getAll = () => ({
+  type : "GET_ALL"
+})
